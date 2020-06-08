@@ -1,0 +1,79 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Zadanie z Pai</title>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+      <!-- Bootstrap działa standardowo z jQuery, ta wersja biblioteki integruje BS z VUE: -->
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Zadanie z Pai</h1>
+     
+    <div id="app">
+      <b-container><!-- Kontener Bootstrap-->
+        <b-form-group horizontal label="Filtrowanie tabeli" class="mb-0">
+          <b-input-group>
+            <b-form-input v-model="filter" placeholder="Czego szukasz?" />
+               </b-input-group>
+          </b-form-group>    
+         <template>
+             <b-table striped hover
+                      :items="items"
+                      :fields="fields"
+                      :filter="filter"
+                      @row-clicked="rowClickHandler"
+                    >
+             </b-table>
+          </template>
+       
+        </b-container>
+    </div>
+     
+    <script>        
+      window.app = new Vue({
+        el: "#app",
+        data: {
+          filter: '',
+          items: [ //tę tablicę trzeba wczytać z JSONa na serwerze zazwyczaj, my tu wpiszemy na sztywno:
+            { Imie: "Jan", Nazwisko: "Kowalski", Wiek: "35" },
+          ],
+          fields:
+            [
+            {
+                key: "Imie",
+                sortable: true,
+                label: "Imie"
+            },
+            {
+                key: "Nazwisko",
+                sortable: true,
+                label: "Nazwisko"
+            },
+                           {
+                key: "Wiek",
+                sortable: true,
+                label: "Wiek"
+            }
+               
+            ]
+        },
+         
+         methods:
+           {
+                rowClickHandler: function(record, index) {
+                //zdarzenie kliknięcia w wiersz
+                        alert('wiersz:  ' + JSON.stringify(record) + '\nindex:' + index); // This will be the item data for the row
+                }
+         }
+       
+      });
+</script>
+  </body>
+</html>
